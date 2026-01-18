@@ -1,0 +1,323 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  delay: string;
+  themeColor: string;
+  icon: string;
+}
+
+const { title, description, url, delay, themeColor, icon } = Astro.props;
+---
+
+<a href={url} class="portal-card reveal" style={`animation-delay: ${delay}; --theme: ${themeColor}`}>
+  <div class="card-inner">
+    <div class="card-glow"></div>
+    <div class="terminal-header">
+      <div class="header-dots">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="gateway-id">GW-{title.toUpperCase().substring(0, 3)}-01</div>
+    </div>
+    
+    <div class="card-body">
+      <div class="focus-group">
+        <div class="icon-orb" style={`--orb-color: ${themeColor}`}>
+          <div class="icon-container">
+            <Fragment set:html={icon} />
+          </div>
+          <div class="orb-ring"></div>
+        </div>
+        
+        <div class="title-group">
+          <span class="sub-label">AUTHORIZED PORTAL</span>
+          <h3 class="portal-title">{title}</h3>
+        </div>
+      </div>
+
+      <p class="portal-desc">{description}</p>
+
+      <div class="card-action">
+        <div class="action-trigger">
+          <span class="action-text">LAUNCH PORTAL</span>
+          <div class="action-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="connection-line"></div>
+      </div>
+    </div>
+  </div>
+</a>
+
+<style>
+  .portal-card {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 20px;
+    z-index: 1;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .card-inner {
+    position: relative;
+    background: rgba(10, 10, 10, 0.5);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, var(--theme), transparent 25%);
+    opacity: 0;
+    filter: blur(40px);
+    transition: opacity 0.6s ease;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .terminal-header {
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .header-dots {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .header-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--fg-subtle);
+    opacity: 0.3;
+  }
+
+  .gateway-id {
+    font-family: monospace;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    color: var(--fg-subtle);
+    font-weight: 700;
+  }
+
+  .card-body {
+    padding: 2rem 1.5rem 1.5rem;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .focus-group {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .icon-orb {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+  }
+
+  .icon-container {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme);
+    position: relative;
+    z-index: 2;
+    transition: all 0.4s ease;
+  }
+
+  .orb-ring {
+    position: absolute;
+    inset: -4px;
+    border: 1px solid var(--theme);
+    border-radius: 18px;
+    opacity: 0;
+    transition: all 0.4s ease;
+    z-index: 1;
+  }
+
+  .title-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sub-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--theme);
+    opacity: 0.8;
+    margin-bottom: 0.25rem;
+  }
+
+  .portal-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.01em;
+  }
+
+  .portal-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--fg-muted);
+    min-height: 3.2rem;
+  }
+
+  .card-action {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .action-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .action-text {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--fg-subtle);
+    transition: color 0.4s ease;
+  }
+
+  .action-arrow {
+    color: var(--fg-subtle);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .connection-line {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .connection-line::after {
+    content: '';
+    position: absolute;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--theme), transparent);
+    transition: left 0.6s ease;
+  }
+
+  /* Hover & Active Effects */
+  .portal-card:hover,
+  .portal-card.is-active {
+    transform: translateY(-6px);
+  }
+
+  .portal-card:hover .card-inner,
+  .portal-card.is-active .card-inner {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(15, 15, 15, 0.7);
+    box-shadow: 0 30px 60px -15px rgba(0,0,0,0.6);
+  }
+
+  .portal-card:hover .card-glow,
+  .portal-card.is-active .card-glow {
+    opacity: 0.08;
+  }
+
+  .portal-card:hover .icon-container,
+  .portal-card.is-active .icon-container {
+    background: var(--theme);
+    color: white;
+    border-color: var(--theme);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--theme);
+  }
+
+  .portal-card:hover .orb-ring,
+  .portal-card.is-active .orb-ring {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+
+  .portal-card:hover .action-text,
+  .portal-card.is-active .action-text {
+    color: white;
+  }
+
+  .portal-card:hover .action-arrow,
+  .portal-card.is-active .action-arrow {
+    color: var(--theme);
+    transform: translateX(4px);
+  }
+
+  .portal-card:hover .connection-line::after,
+  .portal-card.is-active .connection-line::after {
+    left: 100%;
+  }
+
+  /* Touch Support */
+  .portal-card:active {
+    transform: scale(0.97);
+  }
+
+  @media (max-width: 768px) {
+    .card-body {
+      padding: 1.5rem;
+    }
+    
+    .portal-title {
+      font-size: 1.35rem;
+    }
+    
+    .portal-desc {
+      font-size: 0.85rem;
+    }
+    
+    .icon-orb {
+      width: 44px;
+      height: 44px;
+    }
+    
+    .terminal-header {
+      padding: 0.75rem 1.25rem;
+    }
+  }
+</style>

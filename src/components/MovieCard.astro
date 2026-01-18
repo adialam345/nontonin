@@ -1,0 +1,123 @@
+---
+interface Props {
+  title: string;
+  category: string;
+  rating: string;
+  image: string;
+}
+
+const { title, category, rating, image } = Astro.props;
+---
+
+<div class="movie-card">
+  <div class="card-image-wrapper">
+    <img src={image} alt={title} loading="lazy" />
+    <div class="card-overlay">
+      <div class="rating">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        {rating}
+      </div>
+      <button class="play-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      </button>
+    </div>
+  </div>
+  <div class="card-info">
+    <h3>{title}</h3>
+    <p>{category}</p>
+  </div>
+</div>
+
+<style>
+  .movie-card {
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .movie-card:hover {
+    transform: translateY(-10px);
+  }
+
+  .card-image-wrapper {
+    position: relative;
+    aspect-ratio: 2/3;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-premium);
+  }
+
+  .card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .movie-card:hover .card-image-wrapper img {
+    transform: scale(1.1);
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+  .movie-card:hover .card-overlay {
+    opacity: 1;
+  }
+
+  .rating {
+    align-self: flex-end;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: var(--primary);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .movie-card:hover .play-icon {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .card-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-info p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+</style>

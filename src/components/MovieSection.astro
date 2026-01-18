@@ -1,0 +1,73 @@
+---
+import MovieCard from './MovieCard.astro';
+
+interface Movie {
+  title: string;
+  category: string;
+  rating: string;
+  image: string;
+}
+
+interface Props {
+  title: string;
+  movies: Movie[];
+}
+
+const { title, movies } = Astro.props;
+---
+
+<section class="movie-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>{title}</h2>
+      <a href="#" class="view-all">Lihat Semua</a>
+    </div>
+    <div class="movie-grid">
+      {movies.map((movie) => (
+        <MovieCard {...movie} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .movie-section {
+    padding: 4rem 0;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .view-all {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.3s ease;
+  }
+
+  .view-all:hover {
+    opacity: 0.8;
+  }
+
+  .movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+
+  @media (max-width: 640px) {
+    .movie-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+  }
+</style>

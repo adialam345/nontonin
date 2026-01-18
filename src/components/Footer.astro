@@ -1,0 +1,140 @@
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-accent">Nonton</span>in
+      </div>
+      <p>Nikmati ribuan koleksi film dan drama terbaik dari berbagai belahan dunia hanya di Nontonin.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Navigasi</h4>
+      <ul>
+        <li><a href="/">Beranda</a></li>
+        <li><a href="/movies">Film</a></li>
+        <li><a href="/series">Series</a></li>
+        <li><a href="/top">Populer</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Bantuan</h4>
+      <ul>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/contact">Kontak Kami</a></li>
+        <li><a href="/privacy">Privasi</a></li>
+        <li><a href="/terms">Syarat & Ketentuan</a></li>
+      </ul>
+    </div>
+    <div class="footer-social">
+      <h4>Ikuti Kami</h4>
+      <div class="social-icons">
+        <a href="#" class="social-icon">IG</a>
+        <a href="#" class="social-icon">FB</a>
+        <a href="#" class="social-icon">TW</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p>&copy; 2026 Nontonin. Dibuat dengan cinta untuk pecinta film.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #0d0d10;
+    padding: 6rem 0 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+  }
+
+  .logo-accent {
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .footer-brand p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    max-width: 300px;
+  }
+
+  h4 {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .footer-links ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .footer-links a {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-main);
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .social-icon:hover {
+    background: var(--primary);
+    transform: translateY(-3px);
+  }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 992px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+</style>
